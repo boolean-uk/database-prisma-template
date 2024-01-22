@@ -2,11 +2,23 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
+    provider = "prisma-client-js"
 }
 
 datasource db {
-  provider          = "postgresql"
-  url               = env("DATABASE_URL")
-  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+    provider          = "postgresql"
+    url               = env("DATABASE_URL")
+    shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+}
+
+model Cohort {
+    id       Int       @id @default(autoincrement())
+    name     String
+    teachers Teacher[]
+}
+
+model Teacher {
+    id      Int      @id @default(autoincrement())
+    name    String
+    cohorts Cohort[]
 }
